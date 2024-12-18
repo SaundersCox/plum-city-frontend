@@ -1,30 +1,40 @@
-name: Deploy to Netlify
+name: Deploy Angular App to Netlify
 
 on:
   push:
     branches:
-      - main # Replace 'main' with your default branch name if different
+      - main # Replace 'main' with your branch name if different
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16" # Match the Node.js version your Angular project requires
+
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
-          npm install
+          npm ci  # Ensures a clean installation from `package-lock.json`
 
-      - name: Build the site
+      # Step 4: Build the Angular application
+      - name: Build Angular app
         run: |
-          npm run build  # Replace this with your build command if different
+          npm run build -- --output-path=dist  # Adjust output path if different
 
+      # Step 5: Deploy to Netlify
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2.4
         with:
-          publish-dir: ./dist # Replace './dist' with your build output directory
+          publish-dir: dist # This is the default Angular build output directory
           production-deploy: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
