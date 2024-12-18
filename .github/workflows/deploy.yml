@@ -18,17 +18,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16" # Match the Node.js version your Angular project requires
+          node-version: "22" # Match the Node.js version your Angular project requires
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: |
-          npm ci  # Ensures a clean installation from `package-lock.json`
+          npm ci
 
       # Step 4: Build the Angular application
       - name: Build Angular app
         run: |
-          npm run build -- --output-path=dist  # Adjust output path if different
+          npm run build -- --output-path=dist
 
       # Step 5: Deploy to Netlify
       - name: Deploy to Netlify
