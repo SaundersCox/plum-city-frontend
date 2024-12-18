@@ -1,0 +1,10 @@
+[images]
+
+[build]
+  command = "ng build --prod"
+  publish = "dist/plum-city/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
