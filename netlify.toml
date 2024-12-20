@@ -1,8 +1,8 @@
 [images]
 
 [build]
-  command = "ng build"
-  publish = "dist/plum-city/browser"
+  command = "ng build --configuration=production"
+  publish = "dist/plum-city"
 
 [[redirects]]
   from = "/*"
